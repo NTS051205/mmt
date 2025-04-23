@@ -278,13 +278,13 @@ function initializeCodeDisplay() {
 function initializeArrayVisualization() {
     const arrayContainer = document.getElementById('arrayVisualization');
     arrayContainer.innerHTML = `
-        <div style="margin-bottom: 10px;">
-            <div style="margin-bottom: 5px;">Mảng Khoảng Cách:</div>
-            <div id="distanceArray" style="display: flex; gap: 5px;"></div>
+        <div>
+            <div class="array-label">Mảng Khoảng Cách:</div>
+            <div id="distanceArray"></div>
         </div>
         <div>
-            <div style="margin-bottom: 5px;">Mảng Đã Thăm:</div>
-            <div id="visitedArray" style="display: flex; gap: 5px;"></div>
+            <div class="array-label">Mảng Đã Thăm:</div>
+            <div id="visitedArray"></div>
         </div>
     `;
     
