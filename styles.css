@@ -1,18 +1,21 @@
 .array-cell {
     display: flex;
     flex-direction: column;
-    width: 50px;
+    min-width: 50px;
     height: 50px;
     border: 1px solid #666;
     text-align: center;
     background-color: #333;
     padding: 2px;
+    margin: 2px;
+    overflow: hidden;
 }
 
 .array-cell .node-label {
     font-size: 12px;
     color: #888;
     border-bottom: 1px solid #666;
+    padding: 2px 0;
 }
 
 .array-cell .value {
@@ -21,6 +24,8 @@
     align-items: center;
     justify-content: center;
     font-size: 14px;
+    padding: 2px;
+    word-break: break-word;
 }
 
 .array-cell.current {
@@ -30,6 +35,26 @@
 
 .array-cell.visited {
     background-color: #1e3f1e;
+}
+
+#arrayVisualization {
+    margin: 10px;
+    padding: 10px;
+    background-color: #1e1e1e;
+    border-radius: 5px;
+}
+
+#distanceArray, #visitedArray {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.array-label {
+    color: #fff;
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .container {
