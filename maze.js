@@ -85,11 +85,22 @@ class MazeGame {
             const distanceToStart = Math.abs(y) + Math.abs(x);
             const distanceToEnd = Math.abs(y - (height-1)) + Math.abs(x - (width-1));
             
+            // Chỉ đặt bom nếu không quá gần điểm bắt đầu hoặc kết thúc
             if (distanceToStart > 2 && distanceToEnd > 2) {
-                maze[y][x] = 4;
-                bombsPlaced++;
+                // Kiểm tra xem có đường đi từ điểm bắt đầu đến điểm kết thúc mà không đi qua bom này không
+                const tempMaze = maze.map(row => [...row]);
+                tempMaze[y][x] = 4;
+                const path = this.findShortestPath(tempMaze);
+                
+                if (path && path.length > 0) {
+                    maze[y][x] = 4;
+                    bombsPlaced++;
+                }
             }
         }
+
+        // Đảm bảo điểm đích vẫn còn là 3
+        maze[height-1][width-1] = 3;
 
         return maze;
     }
@@ -286,6 +297,26 @@ class MazeGame {
         // Set grid size based on maze dimensions
         mazeDiv.style.gridTemplateColumns = `repeat(${this.maze[0].length}, ${this.cellSize}px)`;
         mazeDiv.style.gridTemplateRows = `repeat(${this.maze.length}, ${this.cellSize}px)`;
+        
+        // Tìm vị trí điểm đích
+        let endX = -1, endY = -1;
+        for (let y = 0; y < this.maze.length; y++) {
+            for (let x = 0; x < this.maze[0].length; x++) {
+                if (this.maze[y][x] === 3) {
+                    endX = x;
+                    endY = y;
+                    break;
+                }
+            }
+            if (endX !== -1) break;
+        }
+        
+        // Nếu không tìm thấy điểm đích, đặt lại ở góc dưới phải
+        if (endX === -1) {
+            endX = this.maze[0].length - 1;
+            endY = this.maze.length - 1;
+            this.maze[endY][endX] = 3;
+        }
         
         for (let y = 0; y < this.maze.length; y++) {
             for (let x = 0; x < this.maze[0].length; x++) {
